@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Entity
-@Table(name = "pago")
+@Table(name = "pagos")
 public class Pago {
     @SequenceGenerator(name = "pago_id_gen", sequenceName = "empleado_codigo_empleado_seq", allocationSize = 1)
     @EmbeddedId

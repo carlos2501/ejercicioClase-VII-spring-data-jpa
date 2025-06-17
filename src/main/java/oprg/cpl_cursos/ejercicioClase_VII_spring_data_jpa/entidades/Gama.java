@@ -14,11 +14,13 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "gama_producto")
-public class GamaProducto {
+@Table(name = "gamas")
+public class Gama {
     @Id
-    @SequenceGenerator(name = "gama_producto_id_gen", sequenceName = "empleado_codigo_empleado_seq", allocationSize = 1)
-    @Column(name = "gama", nullable = false, length = 50)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @Column(name = "gama", unique = true, nullable = false)
     private String gama;
 
     @Column(name = "descripcion_texto", length = Integer.MAX_VALUE)
@@ -30,7 +32,7 @@ public class GamaProducto {
     @Column(name = "imagen", length = 256)
     private String imagen;
 
-    @OneToMany(mappedBy = "gama")
-    private Set<oprg.cpl_cursos.ejercicioClase_VII_spring_data_jpa.Producto> productos = new LinkedHashSet<>();
+    @ManyToMany(mappedBy ="gamas")
+    private Set<Producto> productos = new LinkedHashSet<>();
 
 }

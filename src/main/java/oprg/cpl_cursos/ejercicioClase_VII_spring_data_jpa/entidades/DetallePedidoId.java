@@ -17,11 +17,10 @@ import java.util.Objects;
 @Setter
 @Embeddable
 public class DetallePedidoId implements Serializable {
-    private static final long serialVersionUID = -3295896381055332878L;
-    @Column(name = "codigo_pedido", nullable = false)
+    @Column(name = "id_pedido", nullable = false)
     private Integer codigoPedido;
 
-    @Column(name = "codigo_producto", nullable = false, length = 15)
+    @Column(name = "id_producto", nullable = false, length = 15)
     private String codigoProducto;
 
     @Override

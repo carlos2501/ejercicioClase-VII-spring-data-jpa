@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @Entity
-@Table(name = "detalle_pedido")
+@Table(name = "lineas_pedidos")
 public class DetallePedido {
     @SequenceGenerator(name = "detalle_pedido_id_gen", sequenceName = "empleado_codigo_empleado_seq", allocationSize = 1)
     @EmbeddedId
@@ -21,13 +21,13 @@ public class DetallePedido {
 
     @MapsId("codigoPedido")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "codigo_pedido", nullable = false)
-    private oprg.cpl_cursos.ejercicioClase_VII_spring_data_jpa.Pedido codigoPedido;
+    @JoinColumn(name = "id_pedido", nullable = false)
+    private Pedido codigoPedido;
 
     @MapsId("codigoProducto")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "codigo_producto", nullable = false)
-    private oprg.cpl_cursos.ejercicioClase_VII_spring_data_jpa.Producto codigoProducto;
+    @JoinColumn(name = "id_producto", nullable = false)
+    private Producto codigoProducto;
 
     @Column(name = "cantidad", nullable = false)
     private Integer cantidad;

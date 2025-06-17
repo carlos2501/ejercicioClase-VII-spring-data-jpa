@@ -15,14 +15,9 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "oficina")
+@Table(name = "oficinas")
 public class Oficina {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "codigo_oficina", nullable = false, length = 10)
-    private Integer id;
-
-    @Column(unique = true, nullable = false)
     private String codigoOficina;
 
     @Column(name = "ciudad", nullable = false, length = 30)

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -15,32 +16,34 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "pedido")
+@Table(name = "pedidos")
 public class Pedido {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "codigo_pedido", nullable = false)
     private Integer id;
 
     @Column(name = "fecha_pedido", nullable = false)
-    private LocalDate fechaPedido;
+    private LocalDateTime fechaPedido;
 
     @Column(name = "fecha_esperada", nullable = false)
     private LocalDate fechaEsperada;
 
     @Column(name = "fecha_entrega")
-    private LocalDate fechaEntrega;
+    private LocalDateTime fechaEntrega;
 
-    @Column(name = "estado", nullable = false, length = 15)
-    private String estado;
+    @ManyToOne
+    @JoinColumn(name="estado_id")
+    private EstadoPedido estado;
 
     @Column(name = "comentarios", length = Integer.MAX_VALUE)
     private String comentarios;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "codigo_cliente", nullable = false)
-    private Cliente codigoCliente;
+    private Cliente cliente;
 
     @OneToMany(mappedBy = "codigoPedido")
-    private Set<oprg.cpl_cursos.ejercicioClase_VII_spring_data_jpa.DetallePedido> detallePedidos = new LinkedHashSet<>();
+    private Set<DetallePedido> detallePedidos = new LinkedHashSet<>();
 
 }

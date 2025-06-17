@@ -16,7 +16,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "producto")
+@Table(name = "productos")
 public class Producto {
     @Id
     @Column(name = "codigo_producto", nullable = false, length = 15)
@@ -25,9 +25,11 @@ public class Producto {
     @Column(name = "nombre", nullable = false, length = 70)
     private String nombre;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "gama", nullable = false)
-    private oprg.cpl_cursos.ejercicioClase_VII_spring_data_jpa.GamaProducto gama;
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinTable(name ="productos_gamas",
+        joinColumns = @JoinColumn(name="id_producto"),
+        inverseJoinColumns = @JoinColumn(name="id_gama") )
+    private Set<Gama> gamas = new LinkedHashSet<>();
 
     @Column(name = "dimensiones", length = 25)
     private String dimensiones;
@@ -50,6 +52,6 @@ public class Producto {
     private BigDecimal precioProveedor;
 
     @OneToMany(mappedBy = "codigoProducto")
-    private Set<oprg.cpl_cursos.ejercicioClase_VII_spring_data_jpa.DetallePedido> detallePedidos = new LinkedHashSet<>();
+    private Set<DetallePedido> detallePedidos = new LinkedHashSet<>();
 
 }

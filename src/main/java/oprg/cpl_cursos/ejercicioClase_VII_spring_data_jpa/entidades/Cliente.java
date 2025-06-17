@@ -8,13 +8,14 @@ import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.math.BigDecimal;
+import java.util.Set;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "cliente")
+@Table(name = "clientes")
 public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -67,4 +68,7 @@ public class Cliente {
     @ManyToOne
     @JoinColumn(name = "codigo_empleado_rep_ventas")
     private Empleado repVentas;
+
+    @OneToMany(mappedBy = "cliente")
+    private Set<Pedido> pedidos;
 }
