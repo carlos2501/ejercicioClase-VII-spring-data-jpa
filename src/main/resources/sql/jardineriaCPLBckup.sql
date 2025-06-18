@@ -19,19 +19,6 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
-DROP DATABASE IF EXISTS jardineria;
---
--- TOC entry 4882 (class 1262 OID 16809)
--- Name: jardineria; Type: DATABASE; Schema: -; Owner: postgres
---
-
-CREATE DATABASE jardineria WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE_PROVIDER = libc LOCALE = 'English_United States.1252';
-
-
-ALTER DATABASE jardineria OWNER TO postgres;
-
-\connect jardineria
-
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
@@ -1414,11 +1401,11 @@ ALTER TABLE ONLY public.pedidos
 --
 -- TOC entry 4883 (class 0 OID 0)
 -- Dependencies: 4882
--- Name: DATABASE jardineria; Type: ACL; Schema: -; Owner: postgres
+-- Name: DATABASE jardineria2; Type: ACL; Schema: -; Owner: postgres
 --
 
-REVOKE ALL ON DATABASE jardineria FROM postgres;
-GRANT ALL ON DATABASE jardineria TO postgres WITH GRANT OPTION;
+REVOKE ALL ON DATABASE jardineria2 FROM postgres;
+GRANT ALL ON DATABASE jardineria2 TO postgres WITH GRANT OPTION;
 
 
 --
