@@ -23,8 +23,9 @@ public class ClienteCtrl {
     public String listado(Model modelo) {
         List<Cliente> listaClientes = clienteSrvc.listarTodos();
         modelo.addAttribute("titulo", "Lista de Clientes");
+
         modelo.addAttribute("clientes", listaClientes);
-        return "clientes";
+        return "viistaLista";
     }
 
 
