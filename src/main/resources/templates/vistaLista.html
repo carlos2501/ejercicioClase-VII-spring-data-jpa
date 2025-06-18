@@ -20,28 +20,44 @@
 		</header>
 		<main>
 			<div th:replace="~{fragmentos/biblioteca :: mensajesUsuario}"></div>
+			
 			<table class="table table-striped table-hover table-bordered align-middle">
 				<tr>
+					<th></th>
 					<th th:each="c : ${cabeceras}" th:text="${c}"></th>
 					<!-- Añadimos la columnas para los iconos de acción -->
 					<th>Acciones</th>
 				</tr>
-				<tr th:each="fila : ${filas}">
-					<td th:each="campo : ${fila}" th:text="${campo.value}"></td>
-					
-					<!-- icono de edición> -->
-					<td><a th:href="'/edicion/' + ${fila.get('id')}"><i class="bi bi-pencil-square"></i></a></td>
-					<!-- icono de borrado -->
-					<td>
-						<a data-bs-toggle="modal" data-bs-target="#modalBorrado"
-					       data-th-attr="data-id=${fila.get('id')},
-					       data-apellidos=${fila.get('apellidos')}">
-							<i class="bi bi-trash"></i>
-						</a>
-					</td>
-				</tr>
+				<th:block th:each="fila,iStat : ${filas}">
+					<tr >
+						<td><i class="bi bi-plus-circle-dotted" data-bs-toggle="collapse" th:attr="data-bs-target='#datosFila' + ${iStat.index}"></i></td>
+						<td th:each="campo : ${fila}" th:text="${campo.value}"></td>
+						
+						<!-- icono de edición> -->
+						<td><a th:href="'/edicion/' + ${fila.get('id')}"><i class="bi bi-pencil-square"></i></a></td>
+						<!-- icono de borrado -->
+						<td>
+							<a data-bs-toggle="modal" data-bs-target="#modalBorrado"
+							   data-th-attr="data-id=${fila.get('id')},
+						       data-apellidos=${fila.get('apellidos')}">
+								<i class="bi bi-trash"></i>
+							</a>
+						</td>
+					</tr>
+					<tr class="collapse" th:id="'datosFila' + ${iStat.index}">
+						<td th:colspan="${#lists.size(cabeceras) + 3}" class="p-0">
+							<!--
+								Esta celda debe contener la tabla con los datos extendidos.
+								Estos datos debe recibirse en un parámetro independiente para poder procesarlos como en
+								la tabla principal.
+							-->
+							
+						
+						</td>
+					</tr>
+				
+				</th:block>
 			</table>
-			
 			<!-- modal de confirmación de borrado -->
 			<div class="modal fade" id="modalBorrado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div class="modal-dialog modal-dialog-centered">
