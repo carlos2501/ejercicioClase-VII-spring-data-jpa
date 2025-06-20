@@ -42,10 +42,10 @@ public class ProveedorDatosListaGamaImpl implements ProveedorDatosLista{
         return "gama";
     }
 
-    @Override
+    /*@Override
     public Boolean hayDatosExtendidos() {
         return false;
-    }
+    }*/
 
     @Override
     public Map<String, String> getCabecerasExtendidas() {

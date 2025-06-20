@@ -46,10 +46,10 @@ public class ProveedorDatosListaClienteImpl implements ProveedorDatosLista{
         return "cliente";
     }
 
-    @Override
+    /*@Override
     public Boolean hayDatosExtendidos() {
         return false;
-    }
+    }*/
 
     @Override
     public Map<String, String> getCabecerasExtendidas() {

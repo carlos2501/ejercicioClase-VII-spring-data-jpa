@@ -27,7 +27,7 @@ public interface ProveedorDatosLista {
     /**
      * Devuelve si la entidad utiliza o no datos extendidos
      */
-    Boolean hayDatosExtendidos();
+    //Boolean hayDatosExtendidos();
     /**
      * Devuelve las cabeceras de la tabla secundaria que aparece debajo de cada fila si hay hatos extendidos
      */

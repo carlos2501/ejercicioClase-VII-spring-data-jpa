@@ -26,7 +26,7 @@ public class VistaListaCtrl{
         modelo.addAttribute("titulo", proveedor.getTitulo());
         modelo.addAttribute("cabeceras", proveedor.getCabeceras());
         modelo.addAttribute("filas", proveedor.getFilas());
-        modelo.addAttribute("hayDatosExtendidos", proveedor.hayDatosExtendidos());
+        //modelo.addAttribute("hayDatosExtendidos", proveedor.hayDatosExtendidos());
         //modelo.addAttribute("cabecerasExtendidas", proveedor.getCabecerasExtendidas());
         // llamamos a la plantilla de thymeleaf
         return "vistaLista";
