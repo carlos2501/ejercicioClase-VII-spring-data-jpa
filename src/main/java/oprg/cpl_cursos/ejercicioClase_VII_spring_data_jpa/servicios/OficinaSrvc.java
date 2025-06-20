@@ -20,4 +20,8 @@ public class OficinaSrvc {
     public List<Oficina> listarTodos() {
         return oficinaRepo.findAll();
     }
+
+    public Optional<Oficina> cargarOficina(String oficinaId) {
+        return oficinaRepo.findById(oficinaId);
+    }
 }
