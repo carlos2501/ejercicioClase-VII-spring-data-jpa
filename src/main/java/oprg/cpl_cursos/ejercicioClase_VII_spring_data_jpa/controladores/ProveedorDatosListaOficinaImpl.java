@@ -53,6 +53,11 @@ public class ProveedorDatosListaOficinaImpl implements ProveedorDatosLista {
         return "oficina";
     }
 
+    @Override
+    public Boolean hayDatosExtendidos() {
+        return true;
+    }
+
     public Map<String, String> getCabecerasExtendidas() {
         return Map.of("id","Id", "nombre","Nombre", "apellidos","Apellidos", "puesto","Puesto");
     }

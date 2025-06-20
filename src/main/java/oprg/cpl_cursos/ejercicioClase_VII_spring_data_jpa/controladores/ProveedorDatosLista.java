@@ -25,6 +25,10 @@ public interface ProveedorDatosLista {
      */
     String getNombreEntidad();
     /**
+     * Devuelve si la entidad utiliza o no datos extendidos
+     */
+    Boolean hayDatosExtendidos();
+    /**
      * Devuelve las cabeceras de la tabla secundaria que aparece debajo de cada fila si hay hatos extendidos
      */
     Map<String, String> getCabecerasExtendidas();

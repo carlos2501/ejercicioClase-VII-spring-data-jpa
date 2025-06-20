@@ -20,17 +20,16 @@
 		</header>
 		<main>
 			<div th:replace="~{fragmentos/biblioteca :: mensajesUsuario}"></div>
-			
 			<table class="table table-striped table-hover table-bordered align-middle">
 				<tr>
-					<th></th>
+					<th th:if="${hayDatosExtendidos}"></th>
 					<th th:each="c : ${cabeceras}" th:text="${c}"></th>
 					<!-- Añadimos la columnas para los iconos de acción -->
 					<th colspan="2">Acciones</th>
 				</tr>
 				<th:block th:each="fila,iStat : ${filas}">
 					<tr >
-						<td><i class="bi bi-plus-circle-dotted" data-bs-toggle="collapse" th:attr="data-bs-target='#datosFila' + ${iStat.index}"></i></td>
+						<td th:if="${fila.containsKey('datosExtendidos')}"><i class="bi bi-plus-circle-dotted" data-bs-toggle="collapse" th:attr="data-bs-target='#datosFila' + ${iStat.index}"></i></td>
 						<td th:each="campo : ${fila}" th:text="${campo.value}" th:unless="${campo.key eq 'datosExtendidos'}"></td>
 						
 						<!-- icono de edición> -->
@@ -44,8 +43,7 @@
 							</a>
 						</td>
 					</tr>
-					<tr class="collapse" th:id="'datosFila' + ${iStat.index}">
-						<td th:colspan="${#lists.size(cabeceras) + 3}" class="p-0" th:text="${fila.get('datosExtendidos')}"></td>
+					<tr class="collapse" th:if="${fila.containsKey('datosExtendidos')}"  th:id="'datosFila' + ${iStat.index}">
 							<!--
 								Esta celda debe contener la tabla con los datos extendidos.
 								Estos datos debe recibirse en un parámetro independiente para poder procesarlos como en
@@ -53,11 +51,12 @@
 								Hay que recordar que esta vista es general, por lo que en tiempo de diseño no se sabe
 								qué datos se van a recibir
 							-->
-							
-						
+						<td th:colspan="${#lists.size(cabeceras) + 3}" class="p-0" >
+							<ul>
+								<li th:each="emp : ${fila.get('datosExtendidos')}" th:text="${emp}"></li>
+							</ul>
 						</td>
 					</tr>
-				
 				</th:block>
 			</table>
 			<!-- modal de confirmación de borrado -->

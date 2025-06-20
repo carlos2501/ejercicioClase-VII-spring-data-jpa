@@ -17,16 +17,4 @@ public class EmpleadoSrvc {
     public List<Empleado> listarTodos() {
         return empleadoRepo.findAll();
     }
-
-    //ejemplo de LazyInitializationException
-    public String getOficinaDeEmpleado(Integer empleadoId) {
-        Empleado empleado = empleadoRepo.findById(empleadoId)
-                .orElseThrow(() -> new RuntimeException("Empleado no encontrado"));
-
-        // Esto provocará LazyInitializationException porque intentamos acceder
-        // a la oficina fuera de la transacción
-        return "El empleado " + empleado.getNombre() +
-                " trabaja en la oficina: " + empleado.getOficina().getCodigoOficina();
-    }
-
 }

@@ -43,6 +43,11 @@ public class ProveedorDatosListaGamaImpl implements ProveedorDatosLista{
     }
 
     @Override
+    public Boolean hayDatosExtendidos() {
+        return false;
+    }
+
+    @Override
     public Map<String, String> getCabecerasExtendidas() {
         return Map.of();
     }
