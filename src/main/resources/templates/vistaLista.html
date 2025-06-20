@@ -34,7 +34,7 @@
 						<td th:each="campo : ${fila}" th:text="${campo.value}" th:unless="${campo.key eq 'datosExtendidos'}"></td>
 						
 						<!-- icono de edición> -->
-						<td><a th:href="'/edicion/' + ${fila.get('id')}"><i class="bi bi-pencil-square"></i></a></td>
+						<td><a th:href="'/' + ${rutaEntidad} + '/' + ${fila.get('id')}"><i class="bi bi-pencil-square"></i></a></td>
 						<!-- icono de borrado -->
 						<td>
 							<a data-bs-toggle="modal" data-bs-target="#modalBorrado"

@@ -5,10 +5,7 @@ import oprg.cpl_cursos.ejercicioClase_VII_spring_data_jpa.servicios.OficinaSrvc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/oficina")
@@ -21,10 +18,22 @@ public class OficinaCtrl {
     }
 
     @GetMapping("/{ofi}")
-    public String fichaOficina(@PathVariable String ofi, @ModelAttribute Oficina oficina) {
+    public String fichaOficina(@PathVariable String ofi, Model modelo) {
         // 1 - Obtener los datos de la oficina
-        oficina = ofiSrvc.cargarOficina(ofi).orElseThrow();
+        Oficina oficina = ofiSrvc.cargarOficina(ofi).orElseThrow();
+
+        //1b - Asignamos los datos al modelo
+        modelo.addAttribute("oficina", oficina);
         // 2 - Enviar los datos a la plantilla
         return "fichaOficina";
+    }
+
+    @PostMapping("/guardar")
+    public String guardarOficina(@ModelAttribute Oficina ofi) {
+        // 1 - Verificar los datos recibidos (no se hace en este ejemplo)
+
+        // 2- Guardar en la BBDD
+        ofiSrvc.grabarOficina(ofi);
+        return "redirect:/lista/oficina";
     }
 }

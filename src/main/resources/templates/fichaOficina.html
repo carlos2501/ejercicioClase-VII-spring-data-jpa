@@ -53,7 +53,7 @@
 			<div class="form-container">
 				<h2 class="text-center mb-4" style="color: #5c9aff;">Nueva Oficina</h2>
 				
-				<form th:action="@{/oficinas/guardar}" th:object="${oficina}" method="post">
+				<form th:action="@{/oficina/guardar}" th:object="${oficina}" method="post">
 					<div class="row g-3">
 						<!-- Código de Oficina -->
 						<div class="col-md-6">
@@ -132,7 +132,7 @@
 							<button type="submit" class="btn btn-custom text-white px-4 py-2 me-2">
 								<i class="bi bi-save"></i> Guardar
 							</button>
-							<a th:href="@{/oficinas}" class="btn btn-secondary px-4 py-2">
+							<a th:href="@{/lista/oficina}" class="btn btn-secondary px-4 py-2">
 								<i class="bi bi-x-circle"></i> Cancelar
 							</a>
 						</div>

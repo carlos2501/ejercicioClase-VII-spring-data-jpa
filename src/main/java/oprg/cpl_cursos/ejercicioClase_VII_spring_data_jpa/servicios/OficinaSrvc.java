@@ -24,4 +24,8 @@ public class OficinaSrvc {
     public Optional<Oficina> cargarOficina(String oficinaId) {
         return oficinaRepo.findById(oficinaId);
     }
+
+    public void grabarOficina(Oficina oficina) {
+        oficinaRepo.save(oficina);
+    }
 }
