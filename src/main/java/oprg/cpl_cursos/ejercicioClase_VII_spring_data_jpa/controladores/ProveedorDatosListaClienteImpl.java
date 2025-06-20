@@ -45,4 +45,9 @@ public class ProveedorDatosListaClienteImpl implements ProveedorDatosLista{
     public String getNombreEntidad() {
         return "cliente";
     }
+
+    @Override
+    public Map<String, String> getCabecerasExtendidas() {
+        return Map.of();
+    }
 }

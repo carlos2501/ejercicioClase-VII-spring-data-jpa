@@ -26,12 +26,12 @@
 					<th></th>
 					<th th:each="c : ${cabeceras}" th:text="${c}"></th>
 					<!-- Añadimos la columnas para los iconos de acción -->
-					<th>Acciones</th>
+					<th colspan="2">Acciones</th>
 				</tr>
 				<th:block th:each="fila,iStat : ${filas}">
 					<tr >
 						<td><i class="bi bi-plus-circle-dotted" data-bs-toggle="collapse" th:attr="data-bs-target='#datosFila' + ${iStat.index}"></i></td>
-						<td th:each="campo : ${fila}" th:text="${campo.value}"></td>
+						<td th:each="campo : ${fila}" th:text="${campo.value}" th:unless="${campo.key eq 'datosExtendidos'}"></td>
 						
 						<!-- icono de edición> -->
 						<td><a th:href="'/edicion/' + ${fila.get('id')}"><i class="bi bi-pencil-square"></i></a></td>
@@ -45,11 +45,13 @@
 						</td>
 					</tr>
 					<tr class="collapse" th:id="'datosFila' + ${iStat.index}">
-						<td th:colspan="${#lists.size(cabeceras) + 3}" class="p-0">
+						<td th:colspan="${#lists.size(cabeceras) + 3}" class="p-0" th:text="${fila.get('datosExtendidos')}"></td>
 							<!--
 								Esta celda debe contener la tabla con los datos extendidos.
 								Estos datos debe recibirse en un parámetro independiente para poder procesarlos como en
 								la tabla principal.
+								Hay que recordar que esta vista es general, por lo que en tiempo de diseño no se sabe
+								qué datos se van a recibir
 							-->
 							
 						

@@ -24,4 +24,8 @@ public interface ProveedorDatosLista {
      * Devuelve el nombre de la entidad que gestiona, para el registro.
      */
     String getNombreEntidad();
+    /**
+     * Devuelve las cabeceras de la tabla secundaria que aparece debajo de cada fila si hay hatos extendidos
+     */
+    Map<String, String> getCabecerasExtendidas();
 }

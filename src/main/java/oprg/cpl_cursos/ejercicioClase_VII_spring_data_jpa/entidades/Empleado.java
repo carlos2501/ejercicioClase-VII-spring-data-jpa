@@ -38,7 +38,7 @@ public class Empleado {
     @Column(name = "email", nullable = false, length = 100)
     private String email;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "codigo_oficina", nullable = false)
     private Oficina oficina;
 
@@ -52,4 +52,8 @@ public class Empleado {
 
     @OneToMany(mappedBy = "repVentas", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Cliente> clientes = new LinkedHashSet<>();
+
+    public String toListaExtendida() {
+        return "Empleado: " + nombre + " " + apellido1 + " " + apellido2 +" - Puesto: " + puesto;
+    }
 }

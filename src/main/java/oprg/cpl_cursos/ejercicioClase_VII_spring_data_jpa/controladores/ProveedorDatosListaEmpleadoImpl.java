@@ -1,10 +1,8 @@
 package oprg.cpl_cursos.ejercicioClase_VII_spring_data_jpa.controladores;
 
-import oprg.cpl_cursos.ejercicioClase_VII_spring_data_jpa.entidades.Empleado;
 import oprg.cpl_cursos.ejercicioClase_VII_spring_data_jpa.servicios.EmpleadoSrvc;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,11 +36,15 @@ public class ProveedorDatosListaEmpleadoImpl implements ProveedorDatosLista{
                     fila.put("puesto", emp.getPuesto());
                     return fila;
                 }).toList();
-
     }
 
     @Override
     public String getNombreEntidad() {
         return "empleado";
+    }
+
+    @Override
+    public Map<String, String> getCabecerasExtendidas() {
+        return Map.of();
     }
 }

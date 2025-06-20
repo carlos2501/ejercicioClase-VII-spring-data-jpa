@@ -41,4 +41,9 @@ public class ProveedorDatosListaGamaImpl implements ProveedorDatosLista{
     public String getNombreEntidad() {
         return "gama";
     }
+
+    @Override
+    public Map<String, String> getCabecerasExtendidas() {
+        return Map.of();
+    }
 }
