@@ -1,9 +1,10 @@
 package oprg.cpl_cursos.ejercicioClase_VII_spring_data_jpa.controladores;
 
+
 import oprg.cpl_cursos.ejercicioClase_VII_spring_data_jpa.entidades.Oficina;
 import oprg.cpl_cursos.ejercicioClase_VII_spring_data_jpa.servicios.OficinaSrvc;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +19,7 @@ public class OficinaCtrl {
     }
 
     @GetMapping("/{ofi}")
+    @Transactional(readOnly = true)
     public String fichaOficina(@PathVariable String ofi, Model modelo) {
         // 1 - Obtener los datos de la oficina
         Oficina oficina = ofiSrvc.cargarOficina(ofi).orElseThrow();
@@ -31,9 +33,9 @@ public class OficinaCtrl {
     @PostMapping("/guardar")
     public String guardarOficina(@ModelAttribute Oficina ofi) {
         // 1 - Verificar los datos recibidos (no se hace en este ejemplo)
-
+        Oficina oficina = ofi;
         // 2- Guardar en la BBDD
-        ofiSrvc.grabarOficina(ofi);
+        ofiSrvc.grabarOficina(oficina);
         return "redirect:/lista/oficina";
     }
 }
