@@ -50,7 +50,9 @@
 		<div class="row justify-content-center">
 			<div class="col-lg-8">
 				<div class="form-container">
-					<h2 class="text-center mb-4" style="color: #5c9aff;">Nueva Oficina</h2>
+					<h2 class="text-center mb-4" style="color: #5c9aff;" th:if="${nuevo}">Nueva Oficina</h2>
+					<h2 class="text-center mb-4" style="color: #5c9aff;" th:unless="${nuevo}">Datos Oficina</h2>
+					
 					
 					<form th:action="@{/oficina/guardar}" th:object="${oficina}" method="post">
 						<div class="row g-3">
@@ -132,7 +134,7 @@
 									</thead>
 									<tbody>
 										<!-- Se itera sobre la lista de empleados pasada desde el backend -->
-										<tr th:each="empleado : *{empleados}">
+										<tr th:each="empleado, iStat : *{empleados}" th:id="${iStat.index}">
 											<!-- Se muestra el nombre del empleado -->
 											<td th:text="${empleado.nombre}">John</td>
 											<!-- Se muestran los apellidos del empleado -->
@@ -141,7 +143,9 @@
 											<td th:text="${empleado.puesto}">Software Engineer</td>
 											<td>
 												<a data-bs-toggle="modal" data-bs-target="#modalBorrado"
-												   data-th-attr="data-id=${empleado.getId()}">
+												   data-th-attr="data-id=${empleado.getId()},
+												            data-idOfi=${oficina.getCodigoOficina()},
+															data-idFila=${iStat.index}">
 													<i class="bi bi-trash"></i>
 												</a>
 											</td>
@@ -208,11 +212,19 @@
 				// Button that triggered the modal
 				const btn = event.relatedTarget;
 				// extraemos los datos de los atributos data-
-				const id = btn.getAttribute('data-id')
+				const id = btn.getAttribute('data-id');
+				const fila = btn.getAttribute('data-idfila');
 				document.getElementById('tituloModal').textContent = '¿Desea borrar el empleado ' + id + " de la oficina?"
-				document.getElementById('btnConfirmarBorrado').setAttribute('href', '/oficina/borrarempleado/' + id )
+				document.getElementById('btnConfirmarBorrado').setAttribute('onclick', 'eliminarFilaEmpleado(' + fila + ')');
 			})
 		}
+		
+		function eliminarFilaEmpleado(fila){
+			document.getElementById(fila).remove();
+			const modalBorrar = bootstrap.Modal.getInstance(document.getElementById('modalBorrado'));
+			modalBorrar.hide();
+		}
+		
 	</script>
 </body>
 </html>
