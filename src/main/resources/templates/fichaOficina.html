@@ -53,7 +53,6 @@
 					<h2 class="text-center mb-4" style="color: #5c9aff;" th:if="${nuevo}">Nueva Oficina</h2>
 					<h2 class="text-center mb-4" style="color: #5c9aff;" th:unless="${nuevo}">Datos Oficina</h2>
 					
-					
 					<form th:action="@{/oficina/guardar}" th:object="${oficina}" method="post">
 						<div class="row g-3">
 							<!-- Código de Oficina -->
@@ -121,7 +120,7 @@
 								</div>
 							</div>
 							
-							<!-- Se comprueba si la lista de empleados no está vacía antes de renderizar la tabla -->
+							<!-- Se comprueba si la lista de empleados está vacía antes de renderizar la tabla -->
 							<div th:if="${oficina.empleados != null and !oficina.empleados.isEmpty}">
 								<table class="table table-striped table-hover table-bordered">
 									<thead class="table-dark">
@@ -133,14 +132,23 @@
 									</tr>
 									</thead>
 									<tbody>
-										<!-- Se itera sobre la lista de empleados pasada desde el backend -->
-										<tr th:each="empleado, iStat : *{empleados}" th:id="${iStat.index}">
+										<!-- Se itera sobre la lista de empleados pasada desde el controlador -->
+										<tr th:each="empleado, iStat : ${oficina.getEmpleados()}" th:id="${iStat.index}">
+											<!-- Utilizamos <input> ocultos para incluir en el formulario los datos de
+												los empleados -->
+											<input type="hidden" th:field="*{empleados[__${iStat.index}__].id}" />
+											<input type="hidden" th:field="*{empleados[__${iStat.index}__].nombre}" />
+											<input type="hidden" th:field="*{empleados[__${iStat.index}__].apellido1}" />
+											<input type="hidden" th:field="*{empleados[__${iStat.index}__].apellido2}" />
+											<input type="hidden" th:field="*{empleados[__${iStat.index}__].puesto}" />
+											
 											<!-- Se muestra el nombre del empleado -->
 											<td th:text="${empleado.nombre}">John</td>
 											<!-- Se muestran los apellidos del empleado -->
 											<td th:text="${empleado.apellido1} + ' '+ ${empleado.apellido2}">Doe</td>
 											<!-- Se muestra el puesto del empleado -->
 											<td th:text="${empleado.puesto}">Software Engineer</td>
+											<!-- Botón de acción -->
 											<td>
 												<a data-bs-toggle="modal" data-bs-target="#modalBorrado"
 												   data-th-attr="data-id=${empleado.getId()},
@@ -191,7 +199,6 @@
 						</div>
 					</div>
 				</div>
-			
 			</div>
 		</div>
 	</div>
@@ -221,10 +228,26 @@
 		
 		function eliminarFilaEmpleado(fila){
 			document.getElementById(fila).remove();
+			// Al eliminar una fila, hay que actualizar el id de las filas que quedan
+			// Seleccionamos todos los elementos <tr> con un atributo 'id'
+			const filas = document.querySelectorAll('tr[id]');
+			// Recorremos la matriz de elementos
+			filas.forEach((fila, nuevoIndice) => {
+				// 'nuevoIndice' es el ordinal del bucle
+				// Asignamos al 'id' de la fila el nuevo ordinal
+				fila.id = nuevoIndice;
+				// seleccionamos todos <input> de tipo 'hidden' de la fila
+				const inputs = fila.querySelectorAll('input[type="hidden"]');
+				inputs.forEach(input => {
+					// en cada uno de ellos cambiamos el índice de la matriz que ocupan
+					const fieldName = input.name.replace(/\[\d+\]/, `[${nuevoIndice}]`);
+					input.name = fieldName;
+				});
+			});
+			// Cerrar el modal
 			const modalBorrar = bootstrap.Modal.getInstance(document.getElementById('modalBorrado'));
 			modalBorrar.hide();
 		}
-		
 	</script>
 </body>
 </html>
