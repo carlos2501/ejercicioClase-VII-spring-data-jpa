@@ -32,10 +32,10 @@ public class Empleado {
     @Column(name = "apellido2", length = 50)
     private String apellido2;
 
-    @Column(name = "extension", nullable = false, length = 10)
+    @Column(name = "extension", length = 10)
     private String extension;
 
-    @Column(name = "email", nullable = false, length = 100)
+    @Column(name = "email", length = 100)
     private String email;
 
     @ManyToOne(fetch = FetchType.LAZY)

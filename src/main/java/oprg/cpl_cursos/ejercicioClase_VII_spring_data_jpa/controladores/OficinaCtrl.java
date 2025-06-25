@@ -1,6 +1,7 @@
 package oprg.cpl_cursos.ejercicioClase_VII_spring_data_jpa.controladores;
 
 
+import oprg.cpl_cursos.ejercicioClase_VII_spring_data_jpa.DTOs.OficinaDTOFicha;
 import oprg.cpl_cursos.ejercicioClase_VII_spring_data_jpa.entidades.Oficina;
 import oprg.cpl_cursos.ejercicioClase_VII_spring_data_jpa.servicios.OficinaSrvc;
 import org.springframework.stereotype.Controller;
@@ -31,9 +32,9 @@ public class OficinaCtrl {
     }
 
     @PostMapping("/guardar")
-    public String guardarOficina(@ModelAttribute Oficina ofi) {
+    public String guardarOficina(@ModelAttribute OficinaDTOFicha ofi) {
         // 1 - Verificar los datos recibidos (no se hace en este ejemplo)
-        Oficina oficina = ofi;
+        Oficina oficina = ofiSrvc.aEntidad(ofi);
         // 2- Guardar en la BBDD
         ofiSrvc.grabarOficina(oficina);
         return "redirect:/lista/oficina";
