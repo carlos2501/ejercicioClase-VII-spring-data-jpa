@@ -135,6 +135,13 @@
 									<tbody>
 										<!-- Se itera sobre la lista de empleados pasada desde el backend -->
 										<tr th:each="empleado, iStat : *{empleados}" th:id="${iStat.index}">
+											<!-- Utilizamos <input> ocultos para incluir en el formulario los datos de
+												los empleados -->
+											<input type="hidden" th:field="*{empleados[__${iStat.index}__].id}" />
+											<input type="hidden" th:field="*{empleados[__${iStat.index}__].nombre}" />
+											<input type="hidden" th:field="*{empleados[__${iStat.index}__].apellido1}" />
+											<input type="hidden" th:field="*{empleados[__${iStat.index}__].apellido2}" />
+											<input type="hidden" th:field="*{empleados[__${iStat.index}__].puesto}" />
 											<!-- Se muestra el nombre del empleado -->
 											<td th:text="${empleado.nombre}">John</td>
 											<!-- Se muestran los apellidos del empleado -->

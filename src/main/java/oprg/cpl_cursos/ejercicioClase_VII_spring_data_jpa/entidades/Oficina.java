@@ -7,7 +7,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -44,6 +46,6 @@ public class Oficina {
     private String lineaDireccion2;
 
     @OneToMany(mappedBy = "oficina", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Empleado> empleados = new LinkedHashSet<>();
+    private List<Empleado> empleados = new ArrayList<>();
 
 }
