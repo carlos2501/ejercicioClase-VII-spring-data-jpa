@@ -227,7 +227,23 @@
 		}
 		
 		function eliminarFilaEmpleado(fila){
-			document.getElementById(fila).remove();
+			document.getElementById(fila).remove();// Al eliminar una fila, hay que actualizar el id de las filas que quedan
+			// Seleccionamos todos los elementos <tr> con un atributo 'id'
+			const filas = document.querySelectorAll('tr[id]');
+			// Recorremos la matriz de elementos
+			filas.forEach((fila, nuevoIndice) => {
+				// 'nuevoIndice' es el ordinal del bucle
+				// Asignamos al 'id' de la fila el nuevo ordinal
+				fila.id = nuevoIndice;
+				// seleccionamos todos <input> de tipo 'hidden' de la fila
+				const inputs = fila.querySelectorAll('input[type="hidden"]');
+				inputs.forEach(input => {
+					// en cada uno de ellos cambiamos el índice de la matriz que ocupan
+					const fieldName = input.name.replace(/\[\d+\]/, `[${nuevoIndice}]`);
+					input.name = fieldName;
+				});
+			});
+			// Cerrar el modal
 			const modalBorrar = bootstrap.Modal.getInstance(document.getElementById('modalBorrado'));
 			modalBorrar.hide();
 		}
